@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Virgile Allix</title>
+  <style>
+    /* Animation de fond en dégradé */
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      font-family: 'Arial', sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Conteneur centré */
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    /* Animation d'apparition du titre */
+    h1 {
+      font-size: 4rem;
+      margin: 0;
+      animation: fadeInDown 2s ease forwards;
+    }
+    @keyframes fadeInDown {
+      0% { opacity: 0; transform: translateY(-50px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Animation d'apparition du sous-titre */
+    p {
+      font-size: 1.5rem;
+      margin-top: 20px;
+      animation: fadeInUp 2s ease forwards;
+      animation-delay: 1s;
+    }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(50px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Bouton animé */
+    .btn {
+      margin-top: 40px;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.3);
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      animation: popIn 2s ease forwards;
+      animation-delay: 2s;
+    }
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Virgile Allix</h1>
+    <p>Bienvenue sur mon portfolio. Découvrez mes projets et mon univers créatif.</p>
+    <button class="btn" onclick="alert('Merci de votre visite!')">Explorer</button>
+  </div>
+</body>
+</html>
