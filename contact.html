@@ -1,231 +1,813 @@
-<!-- contact.html -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact - Virgile Allix</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* Réinitialisation et styles globaux */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      background: #000;
-      color: #fff;
-      overflow-x: hidden;
+    /* Inclure les mêmes styles globaux que index.html */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Raleway:wght@300;400;700&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
     
-    /* Fond animé amélioré */
+    :root {
+      --primary: #ff0066;
+      --secondary: #33ccff;
+      --accent: #ffcc00;
+      --dark: #111;
+      --light: #fff;
+      --transition-slow: 0.5s ease;
+      --transition-medium: 0.3s ease;
+      --transition-fast: 0.2s ease;
+    }
+    
+    ::selection {
+      background: var(--primary);
+      color: var(--light);
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--primary) var(--dark);
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--dark);
+      color: var(--light);
+      overflow-x: hidden;
+      line-height: 1.6;
+      position: relative;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 700;
+    }
+    
+    a {
+      text-decoration: none;
+      color: var(--light);
+      transition: var(--transition-medium);
+    }
+    
+    /* === EFFETS DE FOND === */
     .background {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: linear-gradient(135deg, #ff0066, #ffcc00, #33ccff, #ff0066);
+      background: linear-gradient(135deg, rgba(255, 0, 102, 0.2), rgba(255, 204, 0, 0.2), rgba(51, 204, 255, 0.2));
       background-size: 400% 400%;
-      animation: bgAnimation 30s ease infinite;
-      z-index: -10;
+      animation: gradientShift 15s ease infinite;
+      z-index: -20;
     }
-    @keyframes bgAnimation {
+    
+    @keyframes gradientShift {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
     
-    /* Navigation améliorée */
-    nav {
+    .noise {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGQ9Ik0wIDBoMzAwdjMwMEgweiIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIuMDUiLz48L3N2Zz4=');
+      opacity: 0.5;
+      z-index: -15;
+      pointer-events: none;
+    }
+    
+    /* === BARRE DE NAVIGATION === */
+    .navbar {
       position: fixed;
       top: 0;
+      left: 0;
       width: 100%;
-      padding: 20px 50px;
+      padding: 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(10px);
-      z-index: 100;
-      animation: fadeInNav 1s ease-out;
+      transition: var(--transition-medium);
+      z-index: 1000;
+      backdrop-filter: blur(8px);
+      background: rgba(17, 17, 17, 0.8);
     }
-    @keyframes fadeInNav {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+    
+    .navbar.scrolled {
+      padding: 0.8rem 1.5rem;
+      background: rgba(17, 17, 17, 0.95);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
     }
-    nav .logo {
-      font-size: 2rem;
-      font-weight: bold;
-      letter-spacing: 2px;
-      animation: logoPulse 2s infinite alternate;
-    }
-    @keyframes logoPulse {
-      from { transform: scale(1); }
-      to { transform: scale(1.05); }
-    }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      margin-left: 30px;
-      font-size: 1.1rem;
+    
+    .logo {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
       position: relative;
-      transition: color 0.3s ease;
+      display: inline-block;
     }
-    nav a:hover { color: #ffcc00; }
-    nav a::after {
+    
+    .logo::before {
       content: '';
       position: absolute;
-      left: 0; bottom: -5px;
-      width: 0;
+      width: 40px;
       height: 2px;
-      background: #ffcc00;
-      transition: width 0.3s;
-    }
-    nav a:hover::after { width: 100%; }
-    
-    /* Header amélioré */
-    header {
-      margin-top: 120px;
-      text-align: center;
-      padding: 20px;
-      animation: headerFlip 2s ease-out;
-    }
-    @keyframes headerFlip {
-      from { transform: rotateX(90deg); opacity: 0; }
-      to { transform: rotateX(0deg); opacity: 1; }
-    }
-    header h1 {
-      font-size: 3.8rem;
-      margin-bottom: 20px;
-      animation: textGlow 3s ease-in-out infinite;
-    }
-    @keyframes textGlow {
-      0% { text-shadow: 0 0 10px #ff0066, 0 0 20px #ffcc00; }
-      50% { text-shadow: 0 0 20px #33ccff, 0 0 30px #ff0066; }
-      100% { text-shadow: 0 0 10px #ff0066, 0 0 20px #ffcc00; }
-    }
-    header p {
-      font-size: 1.4rem;
-      margin-bottom: 40px;
-      animation: fadeIn 2s ease;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      bottom: -5px;
+      left: 0;
+      background: var(--primary);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: var(--transition-medium);
     }
     
-    /* Formulaire de contact amélioré */
-    .contact-form {
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 30px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 10px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-      animation: slideUp 1.5s ease-out;
+    .logo:hover {
+      color: var(--accent);
     }
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(50px); }
-      to { opacity: 1; transform: translateY(0); }
+    
+    .logo:hover::before {
+      transform: scaleX(1);
     }
-    .contact-form h2 {
-      font-size: 2.2rem;
-      margin-bottom: 20px;
-      text-align: center;
-      border-bottom: 2px solid #ffcc00;
-      padding-bottom: 10px;
+    
+    .nav-links {
+      display: flex;
     }
-    .contact-form label {
-      font-size: 1.1rem;
-      margin-bottom: 5px;
-      display: block;
+    
+    .nav-link {
+      margin: 0 1.2rem;
+      position: relative;
+      font-weight: 500;
+      letter-spacing: 1px;
     }
-    .contact-form input,
-    .contact-form textarea {
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
       width: 100%;
-      padding: 12px;
-      margin-bottom: 20px;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      color: var(--accent);
+    }
+    
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--light);
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+    
+    /* === HEADER === */
+    .contact-header {
+      height: 50vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 1rem;
+      position: relative;
+      overflow: hidden;
+      margin-top: 80px;
+    }
+    
+    .contact-header-content {
+      max-width: 900px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .contact-header h1 {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      margin-bottom: 1.5rem;
+      animation: fadeInDown 1s forwards;
+    }
+    
+    @keyframes fadeInDown {
+      from { 
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .contact-header p {
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeIn 1s forwards 0.5s;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    
+    /* === SECTION DE CONTACT === */
+    .contact-section {
+      padding: 4rem 2rem 8rem;
+    }
+    
+    .contact-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4rem;
+    }
+    
+    .contact-info {
+      flex: 1;
+      min-width: 300px;
+      transform: translateY(50px);
+      opacity: 0;
+      animation: fadeInUp 1s forwards;
+    }
+    
+    @keyframes fadeInUp {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    .contact-title {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    
+    .contact-title::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 3px;
+      background: var(--primary);
+      bottom: -15px;
+      left: 0;
+    }
+    
+    .contact-text {
+      margin-bottom: 3rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .contact-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .contact-method {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--accent);
+      font-size: 1.5rem;
+      transition: var(--transition-medium);
+    }
+    
+    .contact-method:hover .contact-icon {
+      background: var(--primary);
+      color: var(--light);
+      transform: translateY(-5px);
+    }
+    
+    .contact-method-details h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .contact-method-details p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+    }
+    
+    .contact-form-container {
+      flex: 1;
+      min-width: 300px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 2.5rem;
+      border-radius: 10px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      transform: translateY(50px);
+      opacity: 0;
+      animation: fadeInUp 1s forwards 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .contact-form-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+    }
+    
+    .form-title {
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    
+    .contact-form {
+      display: grid;
+      gap: 1.5rem;
+    }
+    
+    .form-group {
+      position: relative;
+    }
+    
+    .form-input {
+      width: 100%;
+      padding: 1rem;
+      padding-left: 3rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--light);
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: var(--transition-medium);
+    }
+    
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 0 3px rgba(255, 0, 102, 0.3);
+    }
+    
+    .form-input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .form-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent);
+      font-size: 1.2rem;
+      transition: var(--transition-medium);
+      pointer-events: none;
+    }
+    
+    .form-input:focus + .form-icon {
+      color: var(--primary);
+    }
+    
+    textarea.form-input {
+      min-height: 150px;
+      resize: vertical;
+      padding-top: 2.5rem;
+    }
+    
+    textarea.form-input + .form-icon {
+      top: 1.5rem;
+      transform: none;
+    }
+    
+    .form-submit {
+      width: 100%;
+      padding: 1rem;
+      background: var(--primary);
+      color: var(--light);
       border: none;
       border-radius: 5px;
       font-size: 1rem;
-      background: rgba(255,255,255,0.2);
-      color: #fff;
-      transition: background 0.3s, transform 0.3s;
-    }
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-      background: rgba(255,255,255,0.3);
-      transform: scale(1.02);
-      outline: none;
-    }
-    .contact-form button {
-      width: 100%;
-      padding: 15px;
-      font-size: 1.2rem;
-      border: none;
-      border-radius: 50px;
-      background: rgba(255,255,255,0.3);
-      color: #fff;
+      font-weight: 600;
       cursor: pointer;
-      transition: transform 0.3s, background 0.3s;
-    }
-    .contact-form button:hover {
-      background: rgba(255,255,255,0.5);
-      transform: scale(1.05);
+      transition: var(--transition-medium);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
     
-    /* Footer amélioré */
-    footer {
-      padding: 20px;
-      text-align: center;
-      background: rgba(0, 0, 0, 0.7);
-      margin-top: 60px;
-      animation: pulseFooter 3s infinite;
+    .form-submit::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: var(--accent);
+      transition: var(--transition-medium);
+      z-index: -1;
     }
-    @keyframes pulseFooter {
-      0% { transform: scale(1); opacity: 0.8; }
-      50% { transform: scale(1.05); opacity: 1; }
-      100% { transform: scale(1); opacity: 0.8; }
+    
+    .form-submit:hover::before {
+      width: 100%;
+    }
+    
+    .form-submit:hover {
+      color: var(--dark);
+    }
+    
+    /* === MAP SECTION === */
+    .map-section {
+      padding: 4rem 2rem;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    
+    .map-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      display: inline-block;
+      position: relative;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 3px;
+      background: var(--primary);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .map-frame {
+      width: 100%;
+      height: 400px;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      transform: translateY(50px);
+      opacity: 0;
+      animation: fadeInUp 1s forwards;
+    }
+    
+    /* === FOOTER === */
+    .footer {
+      padding: 3rem 2rem;
+      background: var(--dark);
+      text-align: center;
+      position: relative;
+    }
+    
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .footer-logo {
+      font-family: 'Raleway', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .social-link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      transition: var(--transition-medium);
+    }
+    
+    .social-link:hover {
+      background: var(--primary);
+      transform: translateY(-5px);
+    }
+    
+    .social-link i {
+      font-size: 1.2rem;
+    }
+    
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .footer-link {
+      position: relative;
+    }
+    
+    .footer-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      bottom: -5px;
+      left: 0;
+      transition: var(--transition-medium);
+    }
+    
+    .footer-link:hover::after {
+      width: 100%;
+    }
+    
+    .copyright {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.9rem;
+    }
+    
+    /* === RESPONSIVE === */
+    @media (max-width: 992px) {
+      .contact-container {
+        flex-direction: column;
+      }
+      
+      .contact-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      .contact-info {
+        text-align: center;
+      }
+      
+      .contact-methods {
+        align-items: center;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 1rem;
+      }
+      
+      .nav-links {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(17, 17, 17, 0.95);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transform: translateX(-100%);
+        transition: transform 0.5s ease;
+        z-index: 900;
+      }
+      
+      .nav-links.active {
+        transform: translateX(0);
+      }
+      
+      .nav-link {
+        font-size: 1.5rem;
+      }
+      
+      .nav-toggle {
+        display: block;
+        z-index: 1000;
+      }
+      
+      .map-frame {
+        height: 300px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Fond animé -->
+  <!-- Fond Animé -->
   <div class="background"></div>
+  <div class="noise"></div>
   
-  <!-- Navigation -->
-  <nav>
-    <div class="logo">Virgile Allix</div>
-    <div class="menu">
-      <a href="index.html">Accueil</a>
-      <a href="projet.html">Projets</a>
-      <a href="about.html">À propos</a>
-      <a href="contact.html">Contact</a>
+  <!-- Barre de Navigation -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">Virgile Allix</a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Accueil</a>
+      <a href="projet.html" class="nav-link">Projets</a>
+      <a href="about.html" class="nav-link">À propos</a>
+      <a href="contact.html" class="nav-link active">Contact</a>
     </div>
+    <button class="nav-toggle">
+      <i class="fas fa-bars"></i>
+    </button>
   </nav>
   
   <!-- Header -->
-  <header>
-    <h1>Contact</h1>
-    <p>Envoyez-moi un message, je suis tout ouïe !</p>
+  <header class="contact-header">
+    <div class="contact-header-content">
+      <h1>Contact</h1>
+      <p>Une idée de projet ? Une collaboration ? N'hésitez pas à me contacter pour discuter de vos besoins.</p>
+    </div>
   </header>
   
-  <!-- Formulaire de contact -->
-  <section class="contact-form">
-    <h2>Prêt à collaborer ?</h2>
-    <form action="#" method="post">
-      <label for="name">Nom</label>
-      <input type="text" id="name" name="name" required>
+  <!-- Section Contact -->
+  <section class="contact-section">
+    <div class="contact-container">
+      <div class="contact-info">
+        <h2 class="contact-title">Parlons de votre projet</h2>
+        <div class="contact-text">
+          <p>N'hésitez pas à me contacter pour discuter de votre projet ou simplement échanger autour du design et des technologies web. Je suis toujours intéressé par de nouvelles collaborations créatives.</p>
+        </div>
+        
+        <div class="contact-methods">
+          <div class="contact-method">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-method-details">
+              <h3>Email</h3>
+              <p>contact@virgileallix.com</p>
+            </div>
+          </div>
+          
+          <div class="contact-method">
+            <div class="contact-icon">
+              <i class="fas fa-phone-alt"></i>
+            </div>
+            <div class="contact-method-details">
+              <h3>Téléphone</h3>
+              <p>+33 6 12 34 56 78</p>
+            </div>
+          </div>
+          
+          <div class="contact-method">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="contact-method-details">
+              <h3>Localisation</h3>
+              <p>Paris, France</p>
+            </div>
+          </div>
+        </div>
+      </div>
       
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
-      
-      <label for="message">Message</label>
-      <textarea id="message" name="message" required></textarea>
-      
-      <button type="submit">Envoyer</button>
-    </form>
+      <div class="contact-form-container">
+        <h3 class="form-title">Envoyez-moi un message</h3>
+        <form class="contact-form">
+          <div class="form-group">
+            <input type="text" class="form-input" placeholder="Votre nom" required>
+            <i class="fas fa-user form-icon"></i>
+          </div>
+          
+          <div class="form-group">
+            <input type="email" class="form-input" placeholder="Votre email" required>
+            <i class="fas fa-envelope form-icon"></i>
+          </div>
+          
+          <div class="form-group">
+            <input type="text" class="form-input" placeholder="Sujet" required>
+            <i class="fas fa-bookmark form-icon"></i>
+          </div>
+          
+          <div class="form-group">
+            <textarea class="form-input" placeholder="Votre message" required></textarea>
+            <i class="fas fa-comment-alt form-icon"></i>
+          </div>
+          
+          <button type="submit" class="form-submit">Envoyer le message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Section Map -->
+  <section class="map-section">
+    <div class="map-container">
+      <h2 class="section-title">Me trouver</h2>
+      <!-- Intégration d'une carte fictive -->
+      <iframe src="https://via.placeholder.com/1200x400?text=Google+Maps+Integration" frameborder="0" class="map-frame" allowfullscreen></iframe>
+    </div>
   </section>
   
   <!-- Footer -->
-  <footer>
-    &copy; 2025 Virgile Allix. Tous droits réservés.
+  <footer class="footer">
+    <div class="footer-content">
+      <a href="index.html" class="footer-logo">Virgile Allix</a>
+      
+      <div class="social-links">
+        <a href="#" class="social-link">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="#" class="social-link">
+          <i class="fab fa-behance"></i>
+        </a>
+        <a href="#" class="social-link">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="#" class="social-link">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+      
+      <div class="footer-nav">
+        <a href="index.html" class="footer-link">Accueil</a>
+        <a href="projet.html" class="footer-link">Projets</a>
+        <a href="about.html" class="footer-link">À propos</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </div>
+      
+      <p class="copyright">&copy; 2025 Virgile Allix. Tous droits réservés.</p>
+    </div>
   </footer>
+  
+  <script>
+    // Navigation mobile
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        navToggle.innerHTML = navLinks.classList.contains('active') 
+          ? '<i class="fas fa-times"></i>' 
+          : '<i class="fas fa-bars"></i>';
+      });
+    }
+    
+    // Effet de scroll pour la navbar
+    window.addEventListener('scroll', () => {
+      const navbar = document.querySelector('.navbar');
+      if (navbar) {
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      }
+    });
+    
+    // Animation du formulaire
+    const formInputs = document.querySelectorAll('.form-input');
+    
+    formInputs.forEach(input => {
+      input.addEventListener('focus', () => {
+        const icon = input.nextElementSibling;
+        if (icon) {
+          icon.style.color = 'var(--primary)';
+        }
+      });
+      
+      input.addEventListener('blur', () => {
+        const icon = input.nextElementSibling;
+        if (icon && !input.value) {
+          icon.style.color = 'var(--accent)';
+        }
+      });
+    });
+  </script>
 </body>
 </html>

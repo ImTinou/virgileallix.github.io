@@ -1,209 +1,858 @@
-<!-- about.html -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>À propos - Virgile Allix</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* Réinitialisation et styles globaux */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      background: #000;
-      color: #fff;
-      overflow-x: hidden;
+    /* Inclure les mêmes styles globaux que index.html */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Raleway:wght@300;400;700&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
     
-    /* Fond animé amélioré */
+    :root {
+      --primary: #ff0066;
+      --secondary: #33ccff;
+      --accent: #ffcc00;
+      --dark: #111;
+      --light: #fff;
+      --transition-slow: 0.5s ease;
+      --transition-medium: 0.3s ease;
+      --transition-fast: 0.2s ease;
+    }
+    
+    ::selection {
+      background: var(--primary);
+      color: var(--light);
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--primary) var(--dark);
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--dark);
+      color: var(--light);
+      overflow-x: hidden;
+      line-height: 1.6;
+      position: relative;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 700;
+    }
+    
+    a {
+      text-decoration: none;
+      color: var(--light);
+      transition: var(--transition-medium);
+    }
+    
+    /* === EFFETS DE FOND === */
     .background {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: linear-gradient(135deg, #ff0066, #ffcc00, #33ccff, #ff0066);
+      background: linear-gradient(135deg, rgba(255, 0, 102, 0.2), rgba(255, 204, 0, 0.2), rgba(51, 204, 255, 0.2));
       background-size: 400% 400%;
-      animation: bgAnimation 30s ease infinite;
-      z-index: -10;
+      animation: gradientShift 15s ease infinite;
+      z-index: -20;
     }
-    @keyframes bgAnimation {
+    
+    @keyframes gradientShift {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
     
-    /* Navigation améliorée */
-    nav {
+    .noise {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGQ9Ik0wIDBoMzAwdjMwMEgweiIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIuMDUiLz48L3N2Zz4=');
+      opacity: 0.5;
+      z-index: -15;
+      pointer-events: none;
+    }
+    
+    /* === BARRE DE NAVIGATION === */
+    .navbar {
       position: fixed;
       top: 0;
+      left: 0;
       width: 100%;
-      padding: 20px 50px;
+      padding: 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(10px);
-      z-index: 100;
-      animation: fadeInNav 1s ease-out;
+      transition: var(--transition-medium);
+      z-index: 1000;
+      backdrop-filter: blur(8px);
+      background: rgba(17, 17, 17, 0.8);
     }
-    @keyframes fadeInNav {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+    
+    .navbar.scrolled {
+      padding: 0.8rem 1.5rem;
+      background: rgba(17, 17, 17, 0.95);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
     }
-    nav .logo {
-      font-size: 2rem;
-      font-weight: bold;
-      letter-spacing: 2px;
-      animation: logoPulse 2s infinite alternate;
-    }
-    @keyframes logoPulse {
-      from { transform: scale(1); }
-      to { transform: scale(1.05); }
-    }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      margin-left: 30px;
-      font-size: 1.1rem;
+    
+    .logo {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
       position: relative;
-      transition: color 0.3s ease;
+      display: inline-block;
     }
-    nav a:hover { color: #ffcc00; }
-    nav a::after {
+    
+    .logo::before {
       content: '';
       position: absolute;
-      left: 0; bottom: -5px;
+      width: 40px;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: var(--primary);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: var(--transition-medium);
+    }
+    
+    .logo:hover {
+      color: var(--accent);
+    }
+    
+    .logo:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .nav-links {
+      display: flex;
+    }
+    
+    .nav-link {
+      margin: 0 1.2rem;
+      position: relative;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      color: var(--accent);
+    }
+    
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--light);
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+    
+    /* === HEADER === */
+    .about-header {
+      height: 60vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 1rem;
+      position: relative;
+      overflow: hidden;
+      margin-top: 80px;
+    }
+    
+    .about-header-content {
+      max-width: 900px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .about-header h1 {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      margin-bottom: 1.5rem;
+      animation: fadeInDown 1s forwards;
+    }
+    
+    @keyframes fadeInDown {
+      from { 
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .about-header p {
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeIn 1s forwards 0.5s;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    
+    /* === SECTION À PROPOS DÉTAILLÉE === */
+    .about-section {
+      padding: 4rem 2rem;
+    }
+    
+    .about-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4rem;
+      align-items: center;
+    }
+    
+    .about-image-container {
+      flex: 1;
+      min-width: 300px;
+      position: relative;
+      transform: translateY(50px);
+      opacity: 0;
+      animation: slideUp 1s forwards;
+    }
+    
+    @keyframes slideUp {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    .about-image {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      transition: var(--transition-medium);
+      transform: rotate(-3deg);
+    }
+    
+    .about-image-container:hover .about-image {
+      transform: rotate(0);
+    }
+    
+    .about-image-container::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 3px solid var(--accent);
+      border-radius: 10px;
+      top: 20px;
+      left: 20px;
+      z-index: -1;
+      transition: var(--transition-medium);
+    }
+    
+    .about-image-container:hover::before {
+      top: 10px;
+      left: 10px;
+    }
+    
+    .about-text-container {
+      flex: 1;
+      min-width: 300px;
+      transform: translateY(50px);
+      opacity: 0;
+      animation: slideUp 1s forwards 0.3s;
+    }
+    
+    .about-subtitle {
+      color: var(--accent);
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    
+    .about-title {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    
+    .about-title::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 3px;
+      background: var(--primary);
+      bottom: -15px;
+      left: 0;
+    }
+    
+    .about-text p {
+      margin-bottom: 1.5rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .about-text p:last-child {
+      margin-bottom: 0;
+    }
+    
+    /* === COMPÉTENCES === */
+    .skills-section {
+      padding: 6rem 2rem;
+      background: rgba(255, 255, 255, 0.03);
+    }
+    
+    .skills-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      position: relative;
+      display: inline-block;
+      transform: translateY(30px);
+      opacity: 0;
+      animation: fadeInUp 1s forwards;
+    }
+    
+    @keyframes fadeInUp {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 3px;
+      background: var(--primary);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-top: 4rem;
+    }
+    
+    .skill-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 2rem;
+      text-align: center;
+      transition: var(--transition-medium);
+      transform: translateY(50px);
+      opacity: 0;
+      animation: fadeInUp 1s forwards;
+    }
+    
+    .skill-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      background: rgba(255, 255, 255, 0.08);
+    }
+    
+    .skill-card:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    
+    .skill-card:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+    
+    .skill-card:nth-child(4) {
+      animation-delay: 0.6s;
+    }
+    
+    .skill-icon {
+      font-size: 3rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    
+    .skill-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .skill-desc {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+    }
+    
+    /* === PARCOURS === */
+    .journey-section {
+      padding: 6rem 2rem;
+    }
+    
+    .journey-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .timeline {
+      position: relative;
+      margin-top: 4rem;
+    }
+    
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      width: 2px;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateX(-50%);
+    }
+    
+    .timeline-item {
+      width: 100%;
+      margin-bottom: 4rem;
+      position: relative;
+    }
+    
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+    
+    .timeline-content {
+      width: 45%;
+      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      transition: var(--transition-medium);
+      position: relative;
+      transform: translateY(50px);
+      opacity: 0;
+      animation: fadeInUp 1s forwards;
+    }
+    
+    .timeline-item:nth-child(even) .timeline-content {
+      animation-delay: 0.3s;
+    }
+    
+    .timeline-content:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-content {
+      left: 0;
+    }
+    
+    .timeline-item:nth-child(even) .timeline-content {
+      left: 55%;
+    }
+    
+    .timeline-dot {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: var(--primary);
+      border-radius: 50%;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      transition: var(--transition-medium);
+    }
+    
+    .timeline-item:hover .timeline-dot {
+      background: var(--accent);
+      box-shadow: 0 0 0 5px rgba(255, 204, 0, 0.3);
+    }
+    
+    .timeline-date {
+      font-size: 0.8rem;
+      color: var(--accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    
+    .timeline-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .timeline-text {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.9rem;
+    }
+    
+    /* === FOOTER === */
+    .footer {
+      padding: 3rem 2rem;
+      background: var(--dark);
+      text-align: center;
+      position: relative;
+    }
+    
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .footer-logo {
+      font-family: 'Raleway', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .social-link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      transition: var(--transition-medium);
+    }
+    
+    .social-link:hover {
+      background: var(--primary);
+      transform: translateY(-5px);
+    }
+    
+    .social-link i {
+      font-size: 1.2rem;
+    }
+    
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .footer-link {
+      position: relative;
+    }
+    
+    .footer-link::after {
+      content: '';
+      position: absolute;
       width: 0;
       height: 2px;
-      background: #ffcc00;
-      transition: width 0.3s;
-    }
-    nav a:hover::after { width: 100%; }
-    
-    /* Header 3D amélioré */
-    header {
-      margin-top: 120px;
-      text-align: center;
-      padding: 20px;
-      animation: headerFlip 2s ease-out;
-    }
-    @keyframes headerFlip {
-      from { transform: rotateX(90deg); opacity: 0; }
-      to { transform: rotateX(0deg); opacity: 1; }
-    }
-    header h1 {
-      font-size: 3.8rem;
-      margin-bottom: 20px;
-      animation: textGlow 3s ease-in-out infinite;
-    }
-    @keyframes textGlow {
-      0% { text-shadow: 0 0 10px #ff0066, 0 0 20px #ffcc00; }
-      50% { text-shadow: 0 0 20px #33ccff, 0 0 30px #ff0066; }
-      100% { text-shadow: 0 0 10px #ff0066, 0 0 20px #ffcc00; }
-    }
-    header p {
-      font-size: 1.4rem;
-      margin-bottom: 40px;
-      animation: fadeIn 2s ease;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      background: var(--accent);
+      bottom: -5px;
+      left: 0;
+      transition: var(--transition-medium);
     }
     
-    /* Sections de contenu avec animation slide-in */
-    .content-section {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 30px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-      animation: slideIn 1.5s ease-out;
-    }
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateX(-100px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-    /* Animation alternative pour les sections paires */
-    .content-section:nth-of-type(even) {
-      animation: slideInRight 1.5s ease-out;
-    }
-    @keyframes slideInRight {
-      from { opacity: 0; transform: translateX(100px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-    .content-section h2 {
-      font-size: 2.2rem;
-      margin-bottom: 15px;
-      border-bottom: 2px solid #ffcc00;
-      padding-bottom: 5px;
-    }
-    .content-section p {
-      font-size: 1.2rem;
-      line-height: 1.6;
+    .footer-link:hover::after {
+      width: 100%;
     }
     
-    /* Footer pulsant et animé */
-    footer {
-      padding: 20px;
-      text-align: center;
-      background: rgba(0, 0, 0, 0.7);
-      margin-top: 60px;
-      animation: pulseFooter 3s infinite;
+    .copyright {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.9rem;
     }
-    @keyframes pulseFooter {
-      0% { transform: scale(1); opacity: 0.8; }
-      50% { transform: scale(1.05); opacity: 1; }
-      100% { transform: scale(1); opacity: 0.8; }
+    
+    /* === RESPONSIVE === */
+    @media (max-width: 992px) {
+      .about-container {
+        flex-direction: column;
+      }
+      
+      .skills-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 1rem;
+      }
+      
+      .nav-links {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(17, 17, 17, 0.95);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transform: translateX(-100%);
+        transition: transform 0.5s ease;
+        z-index: 900;
+      }
+      
+      .nav-links.active {
+        transform: translateX(0);
+      }
+      
+      .nav-link {
+        font-size: 1.5rem;
+      }
+      
+      .nav-toggle {
+        display: block;
+        z-index: 1000;
+      }
+      
+      .timeline::before {
+        left: 20px;
+      }
+      
+      .timeline-content {
+        width: calc(100% - 50px);
+        left: 50px !important;
+      }
+      
+      .timeline-dot {
+        left: 20px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Fond animé -->
+  <!-- Fond Animé -->
   <div class="background"></div>
+  <div class="noise"></div>
   
-  <!-- Navigation -->
-  <nav>
-    <div class="logo">Virgile Allix</div>
-    <div class="menu">
-      <a href="index.html">Accueil</a>
-      <a href="projet.html">Projets</a>
-      <a href="about.html">À propos</a>
-      <a href="contact.html">Contact</a>
+  <!-- Barre de Navigation -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">Virgile Allix</a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Accueil</a>
+      <a href="projet.html" class="nav-link">Projets</a>
+      <a href="about.html" class="nav-link active">À propos</a>
+      <a href="contact.html" class="nav-link">Contact</a>
     </div>
+    <button class="nav-toggle">
+      <i class="fas fa-bars"></i>
+    </button>
   </nav>
   
   <!-- Header -->
-  <header>
-    <h1>À propos</h1>
-    <p>Découvrez mon univers, ma passion et mon parcours unique.</p>
+  <header class="about-header">
+    <div class="about-header-content">
+      <h1>À Propos</h1>
+      <p>Découvrez mon parcours, mes compétences et ma vision du design et du développement web.</p>
+    </div>
   </header>
   
-  <!-- Sections de contenu -->
-  <section class="content-section">
-    <h2>Qui suis-je ?</h2>
-    <p>
-      Je m'appelle Virgile Allix, et je fusionne design et développement web pour créer des expériences digitales inoubliables. Mon travail est une exploration constante des limites entre art et technologie.
-    </p>
+  <!-- Section À propos principale -->
+  <section class="about-section">
+    <div class="about-container">
+      <div class="about-image-container">
+        <img src="https://via.placeholder.com/600x800" alt="Virgile Allix" class="about-image">
+      </div>
+      
+      <div class="about-text-container">
+        <span class="about-subtitle">Qui suis-je</span>
+        <h2 class="about-title">Artisan du numérique passionné</h2>
+        
+        <div class="about-text">
+          <p>Je m'appelle Virgile Allix, et je fusionne design et développement web pour créer des expériences digitales inoubliables. Mon travail est une exploration constante des limites entre art et technologie.</p>
+          <p>Diplômé en design graphique et en développement web, j'ai collaboré sur des projets variés allant de sites interactifs à des installations numériques. Chaque projet est une aventure qui repousse les frontières de l'innovation.</p>
+          <p>La nature, l'architecture contemporaine et l'art abstrait alimentent ma créativité. J'explore sans cesse de nouvelles idées pour donner vie à des interfaces dynamiques et captivantes qui créent un impact visuel et émotionnel.</p>
+        </div>
+      </div>
+    </div>
   </section>
   
-  <section class="content-section">
-    <h2>Mon Parcours</h2>
-    <p>
-      Diplômé en design graphique et en développement web, j'ai collaboré sur des projets variés allant de sites interactifs à des installations numériques. Chaque projet est une aventure qui repousse les frontières de l'innovation.
-    </p>
+  <!-- Section Compétences -->
+  <section class="skills-section">
+    <div class="skills-container">
+      <h2 class="section-title">Mes Compétences</h2>
+      
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-icon">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <h3 class="skill-title">Développement Web</h3>
+          <p class="skill-desc">Création de sites et applications web interactifs, avec une attention particulière à l'accessibilité et aux performances.</p>
+        </div>
+        
+        <div class="skill-card">
+          <div class="skill-icon">
+            <i class="fas fa-bezier-curve"></i>
+          </div>
+          <h3 class="skill-title">Design UI/UX</h3>
+          <p class="skill-desc">Conception d'interfaces intuitives et esthétiques qui placent l'utilisateur au centre de l'expérience digitale.</p>
+        </div>
+        
+        <div class="skill-card">
+          <div class="skill-icon">
+            <i class="fas fa-cubes"></i>
+          </div>
+          <h3 class="skill-title">Animation 3D</h3>
+          <p class="skill-desc">Création d'environnements tridimensionnels et d'animations immersives pour enrichir l'expérience utilisateur.</p>
+        </div>
+        
+        <div class="skill-card">
+          <div class="skill-icon">
+            <i class="fas fa-mobile-alt"></i>
+          </div>
+          <h3 class="skill-title">Design Responsive</h3>
+          <p class="skill-desc">Adaptation fluide des interfaces à tous les appareils pour garantir une expérience optimale sur toutes les plateformes.</p>
+        </div>
+      </div>
+    </div>
   </section>
   
-  <section class="content-section">
-    <h2>Mes Inspirations</h2>
-    <p>
-      La nature, l'architecture contemporaine et l'art abstrait alimentent ma créativité. J'explore sans cesse de nouvelles idées pour donner vie à des interfaces dynamiques et captivantes.
-    </p>
+  <!-- Section Parcours -->
+  <section class="journey-section">
+    <div class="journey-container">
+      <h2 class="section-title">Mon Parcours</h2>
+      
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <span class="timeline-date">2023 - Présent</span>
+            <h3 class="timeline-title">Designer UX/UI Indépendant</h3>
+            <p class="timeline-text">Collaboration avec diverses startups et agences pour créer des expériences numériques innovantes et centrées sur l'utilisateur.</p>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <span class="timeline-date">2021 - 2023</span>
+            <h3 class="timeline-title">Directeur Artistique - Studio Digital</h3>
+            <p class="timeline-text">Direction de projets créatifs et supervision d'une équipe de designers pour des clients internationaux.</p>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <span class="timeline-date">2019 - 2021</span>
+            <h3 class="timeline-title">Développeur Front-End Senior</h3>
+            <p class="timeline-text">Conception et développement d'interfaces interactives pour des applications web complexes.</p>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <span class="timeline-date">2015 - 2019</span>
+            <h3 class="timeline-title">Formation Design & Développement</h3>
+            <p class="timeline-text">Master en Design Numérique et formation autodidacte en développement web et technologies immersives.</p>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+      </div>
+    </div>
   </section>
   
   <!-- Footer -->
-  <footer>
-    &copy; 2025 Virgile Allix. Tous droits réservés.
+  <footer class="footer">
+    <div class="footer-content">
+      <a href="index.html" class="footer-logo">Virgile Allix</a>
+      
+      <div class="social-links">
+        <a href="#" class="social-link">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="#" class="social-link">
+          <i class="fab fa-behance"></i>
+        </a>
+        <a href="#" class="social-link">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="#" class="social-link">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+      
+      <div class="footer-nav">
+        <a href="index.html" class="footer-link">Accueil</a>
+        <a href="projet.html" class="footer-link">Projets</a>
+        <a href="about.html" class="footer-link">À propos</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </div>
+      
+      <p class="copyright">&copy; 2025 Virgile Allix. Tous droits réservés.</p>
+    </div>
   </footer>
+  
+  <script>
+    // Navigation mobile
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        navToggle.innerHTML = navLinks.classList.contains('active') 
+          ? '<i class="fas fa-times"></i>' 
+          : '<i class="fas fa-bars"></i>';
+      });
+    }
+    
+    // Effet de scroll pour la navbar
+    window.addEventListener('scroll', () => {
+      const navbar = document.querySelector('.navbar');
+      if (navbar) {
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      }
+    });
+  </script>
 </body>
 </html>
