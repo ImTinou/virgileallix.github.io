@@ -790,6 +790,101 @@
       font-size: 0.95rem;
       opacity: 0.8;
     }
+
+    /* === SECTION PROJET === */
+    .project-section {
+      position: relative;
+      background: var(--card-color);
+      padding: var(--space-xl) 0;
+      margin: var(--space-xl) 0;
+      border-radius: var(--border-radius-lg);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+    
+    .project-header {
+      text-align: center;
+      margin-bottom: var(--space-xl);
+    }
+    
+    .project-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xl);
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .project-info {
+      flex: 1;
+      min-width: 300px;
+    }
+    
+    .project-image {
+      flex: 1;
+      min-width: 300px;
+      position: relative;
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    }
+    
+    .project-title {
+      font-size: 2rem;
+      margin-bottom: var(--space-md);
+      position: relative;
+    }
+    
+    .project-title::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 3px;
+      background: var(--accent);
+      bottom: -10px;
+      left: 0;
+    }
+    
+    .project-subtitle {
+      color: var(--accent);
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: var(--space-sm);
+    }
+    
+    .project-features {
+      margin: var(--space-md) 0;
+    }
+    
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-sm);
+    }
+    
+    .feature-icon {
+      color: var(--primary);
+      font-size: 1.2rem;
+      margin-top: 0.2rem;
+    }
+    
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-top: var(--space-md);
+    }
+    
+    .tech-badge {
+      padding: 0.4rem 1rem;
+      background: rgba(80, 0, 245, 0.1);
+      color: var(--primary);
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
     
     /* === TESTIMONIALS === */
     .testimonials-section {
@@ -1238,7 +1333,7 @@
     
     <div class="container page-header-content">
       <h1 class="page-title">À <span class="text-gradient">Propos</span></h1>
-      <p class="page-description">Découvrez mon parcours, mes compétences et ma vision du design et du développement digital.</p>
+      <p class="page-description">Découvrez mon parcours, mes compétences et ma vision du développement numérique.</p>
     </div>
   </section>
   
@@ -1253,12 +1348,14 @@
       
       <div class="about-content">
         <span class="about-subtitle">Qui suis-je</span>
-        <h2 class="about-title">Artisan du numérique passionné</h2>
+        <h2 class="about-title">Développeur passionné en formation</h2>
         
         <div class="about-text">
-          <p>Je m'appelle Virgile Allix, et je fusionne design et développement web pour créer des expériences digitales inoubliables. Mon travail est une exploration constante des limites entre art et technologie.</p>
-          <p>Avec plus de 6 ans d'expérience dans l'industrie créative, j'ai développé une approche holistique du design numérique qui allie esthétique visuelle et fonctionnalité. Mon objectif est de créer des expériences qui non seulement captivent visuellement, mais qui engagent également l'utilisateur à un niveau plus profond.</p>
-          <p>La nature, l'architecture contemporaine et l'art abstrait alimentent ma créativité. J'explore sans cesse de nouvelles idées pour donner vie à des interfaces dynamiques et captivantes qui créent un impact visuel et émotionnel durable.</p>
+          <p>Je m'appelle Virgile Allix, j'ai 18 ans et je suis actuellement en première année de BTS SIO (Services Informatiques aux Organisations) option SLAM (Solutions Logicielles et Applications Métiers). Je combine ma formation avec une alternance chez MTB111 où je développe mes compétences dans un environnement professionnel.</p>
+          
+          <p>Passionné par le développement d'applications web et logicielles, j'ai choisi de poursuivre mes études après mon Bac STI2D (Sciences et Technologies de l'Industrie et du Développement Durable) pour approfondir mes connaissances en programmation et en conception de solutions informatiques.</p>
+          
+          <p>Mon objectif est de maîtriser les différentes technologies du développement web et des applications métiers pour créer des solutions innovantes qui répondent aux besoins réels des utilisateurs. Je m'intéresse particulièrement à l'amélioration des processus métiers grâce au développement logiciel.</p>
         </div>
         
         <div class="about-cta">
@@ -1286,6 +1383,14 @@
           <h3 class="skill-title">Développement Web</h3>
           <p class="skill-desc">Création de sites et applications web interactifs, avec une attention particulière à l'accessibilité et aux performances.</p>
         </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">
+            <i class="fas fa-mobile-alt"></i>
+          </div>
+          <h3 class="skill-title">Développement Java</h3>
+          <p class="skill-desc">Conception et réalisation d'applications en Java, en mettant l'accent sur la qualité du code et les bonnes pratiques.</p>
+        </div>
         
         <div class="skill-card">
           <div class="skill-icon">
@@ -1297,18 +1402,72 @@
         
         <div class="skill-card">
           <div class="skill-icon">
-            <i class="fas fa-cubes"></i>
+            <i class="fas fa-database"></i>
           </div>
-          <h3 class="skill-title">Animation 3D</h3>
-          <p class="skill-desc">Création d'environnements tridimensionnels et d'animations immersives pour enrichir l'expérience utilisateur.</p>
+          <h3 class="skill-title">Gestion de BDD</h3>
+          <p class="skill-desc">Conception et administration de bases de données relationnelles pour stocker et gérer efficacement les données des applications.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Section Projet Professionnel -->
+  <section class="project-section" id="projet-actuel">
+    <div class="container">
+      <div class="project-header">
+        <h2 class="section-title reveal-up">Mon <span class="accent-border">Projet Professionnel</span></h2>
+      </div>
+      
+      <div class="project-content">
+        <div class="project-info reveal-left">
+          <span class="project-subtitle">Projet d'alternance chez MTB111</span>
+          <h3 class="project-title">Application de gestion des congés</h3>
+          
+          <p>Dans le cadre de mon alternance chez MTB111, je développe actuellement une application dédiée à la gestion des congés pour l'entreprise. Ce projet répond à un besoin concret d'optimisation des processus RH internes.</p>
+          
+          <div class="project-features">
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <div>
+                <h4>Demande de congés simplifiée</h4>
+                <p>Interface intuitive permettant aux employés de soumettre leurs demandes de congés en quelques clics.</p>
+              </div>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <div>
+                <h4>Validation hiérarchique</h4>
+                <p>Système de workflow pour la validation des demandes par les responsables.</p>
+              </div>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <div>
+                <h4>Tableau de bord RH</h4>
+                <p>Vue d'ensemble des congés de l'entreprise pour faciliter la planification des ressources.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="project-tech">
+            <span class="tech-badge">Java</span>
+            <span class="tech-badge">Spring Boot</span>
+            <span class="tech-badge">MySQL</span>
+            <span class="tech-badge">HTML/CSS</span>
+            <span class="tech-badge">JavaScript</span>
+          </div>
         </div>
         
-        <div class="skill-card">
-          <div class="skill-icon">
-            <i class="fas fa-mobile-alt"></i>
-          </div>
-          <h3 class="skill-title">Design Responsive</h3>
-          <p class="skill-desc">Adaptation fluide des interfaces à tous les appareils pour garantir une expérience optimale sur toutes les plateformes.</p>
+        <div class="project-image reveal-right">
+          <img src="https://via.placeholder.com/500x300" alt="Application de gestion des congés">
         </div>
       </div>
     </div>
@@ -1324,108 +1483,29 @@
       <div class="timeline">
         <div class="timeline-item">
           <div class="timeline-content">
-            <span class="timeline-date">2023 - Présent</span>
-            <h3 class="timeline-title">Designer UX/UI Indépendant</h3>
-            <p class="timeline-text">Collaboration avec diverses startups et agences pour créer des expériences numériques innovantes et centrées sur l'utilisateur.</p>
+            <span class="timeline-date">2024 - Présent</span>
+            <h3 class="timeline-title">BTS SIO SLAM en alternance</h3>
+            <p class="timeline-text">Formation en alternance du BTS Services Informatiques aux Organisations option Solutions Logicielles et Applications Métiers. Développement de compétences techniques en programmation, base de données et conception logicielle.</p>
           </div>
           <div class="timeline-dot"></div>
         </div>
         
         <div class="timeline-item">
           <div class="timeline-content">
-            <span class="timeline-date">2021 - 2023</span>
-            <h3 class="timeline-title">Directeur Artistique - Studio Digital</h3>
-            <p class="timeline-text">Direction de projets créatifs et supervision d'une équipe de designers pour des clients internationaux.</p>
+            <span class="timeline-date">2024 - Présent</span>
+            <h3 class="timeline-title">Alternance chez MTB111</h3>
+            <p class="timeline-text">Mise en pratique des connaissances acquises en formation dans un environnement professionnel. Développement d'une application de gestion des congés pour optimiser les processus RH de l'entreprise.</p>
           </div>
           <div class="timeline-dot"></div>
         </div>
         
         <div class="timeline-item">
           <div class="timeline-content">
-            <span class="timeline-date">2019 - 2021</span>
-            <h3 class="timeline-title">Développeur Front-End Senior</h3>
-            <p class="timeline-text">Conception et développement d'interfaces interactives pour des applications web complexes.</p>
+            <span class="timeline-date">2022 - 2024</span>
+            <h3 class="timeline-title">Bac STI2D</h3>
+            <p class="timeline-text">Baccalauréat Sciences et Technologies de l'Industrie et du Développement Durable. Acquisition des bases en sciences de l'ingénieur et en technologies numériques, préparation aux études supérieures en informatique.</p>
           </div>
           <div class="timeline-dot"></div>
-        </div>
-        
-        <div class="timeline-item">
-          <div class="timeline-content">
-            <span class="timeline-date">2015 - 2019</span>
-            <h3 class="timeline-title">Formation Design & Développement</h3>
-            <p class="timeline-text">Master en Design Numérique et formation autodidacte en développement web et technologies immersives.</p>
-          </div>
-          <div class="timeline-dot"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Section Témoignages -->
-  <section class="testimonials-section">
-    <div class="container">
-      <div class="testimonials-header">
-        <h2 class="section-title reveal-up">Ce que <span class="accent-border">disent</span> mes clients</h2>
-      </div>
-      
-      <div class="testimonials-slider">
-        <div class="testimonials-track" id="testimonials-track">
-          <div class="testimonial">
-            <div class="testimonial-content">
-              <p class="testimonial-text">Virgile a complètement transformé notre présence en ligne. Son approche créative et sa maîtrise technique ont donné vie à notre vision d'une manière que nous n'aurions jamais imaginée. Un vrai partenaire créatif!</p>
-            </div>
-            
-            <div class="testimonial-author">
-              <div class="author-avatar">
-                <img src="https://via.placeholder.com/100" alt="Sarah Dupont">
-              </div>
-              <div class="author-details">
-                <h4>Sarah Dupont</h4>
-                <p class="author-position">Directrice Marketing, Studio Lumière</p>
-              </div>
-            </div>
-          </div>
-          
-          <div class="testimonial">
-            <div class="testimonial-content">
-              <p class="testimonial-text">Travailler avec Virgile a été une expérience révélatrice. Sa capacité à comprendre nos besoins et à les traduire en une expérience numérique cohérente a dépassé toutes nos attentes. Je le recommande vivement.</p>
-            </div>
-            
-            <div class="testimonial-author">
-              <div class="author-avatar">
-                <img src="https://via.placeholder.com/100" alt="Thomas Lebrun">
-              </div>
-              <div class="author-details">
-                <h4>Thomas Lebrun</h4>
-                <p class="author-position">CEO, Innovative Solutions</p>
-              </div>
-            </div>
-          </div>
-          
-          <div class="testimonial">
-            <div class="testimonial-content">
-              <p class="testimonial-text">L'approche de Virgile combine parfaitement créativité et stratégie. Il ne se contente pas de concevoir des interfaces attrayantes, mais pense véritablement à l'expérience utilisateur dans son ensemble.</p>
-            </div>
-            
-            <div class="testimonial-author">
-              <div class="author-avatar">
-                <img src="https://via.placeholder.com/100" alt="Julie Moreau">
-              </div>
-              <div class="author-details">
-                <h4>Julie Moreau</h4>
-                <p class="author-position">Fondatrice, Digital Craft</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="slider-controls">
-          <div class="slider-btn" id="prev-btn">
-            <i class="fas fa-arrow-left"></i>
-          </div>
-          <div class="slider-btn" id="next-btn">
-            <i class="fas fa-arrow-right"></i>
-          </div>
         </div>
       </div>
     </div>
@@ -1435,10 +1515,10 @@
   <section class="cta-section">
     <div class="container">
       <div class="cta-content reveal-up">
-        <h2 class="cta-title">Prêt à <span class="text-gradient">concrétiser</span> votre idée ?</h2>
-        <p class="cta-text">Je suis toujours à la recherche de nouveaux défis créatifs. Contactez-moi pour discuter de votre projet et transformer votre vision en réalité numérique captivante.</p>
+        <h2 class="cta-title">Intéressé par mes <span class="text-gradient">compétences</span> ?</h2>
+        <p class="cta-text">En tant qu'étudiant en BTS SIO SLAM et alternant chez MTB111, je suis toujours à la recherche de nouvelles opportunités d'apprentissage et de collaboration. N'hésitez pas à me contacter pour discuter de vos projets ou pour en savoir plus sur mon parcours.</p>
         <a href="contact.html" class="cta-btn">
-          Discutons-en
+          Me contacter
           <i class="fas fa-arrow-right"></i>
         </a>
       </div>
@@ -1450,16 +1530,16 @@
     <div class="container footer-container">
       <div class="footer-info">
         <a href="index.html" class="footer-logo">Virgile<span>.</span>Allix</a>
-        <p class="footer-text">Designer et développeur créatif spécialisé dans la création d'expériences digitales uniques et mémorables.</p>
+        <p class="footer-text">Étudiant en BTS SIO SLAM et développeur en alternance, passionné par la création d'applications et de solutions informatiques innovantes.</p>
         <div class="social-links">
           <a href="#" class="social-link" aria-label="GitHub">
             <i class="fab fa-github"></i>
           </a>
-          <a href="#" class="social-link" aria-label="Behance">
-            <i class="fab fa-behance"></i>
-          </a>
           <a href="#" class="social-link" aria-label="LinkedIn">
             <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="#" class="social-link" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
           </a>
           <a href="#" class="social-link" aria-label="Instagram">
             <i class="fab fa-instagram"></i>
@@ -1479,13 +1559,13 @@
         </div>
         
         <div class="footer-column">
-          <h3>Services</h3>
+          <h3>Compétences</h3>
           <nav class="footer-nav">
-            <a href="#">Web Design</a>
+            <a href="#">Développement Web</a>
+            <a href="#">Développement Java</a>
             <a href="#">UI/UX Design</a>
-            <a href="#">Développement Frontend</a>
-            <a href="#">Animation 3D</a>
-            <a href="#">Identité Visuelle</a>
+            <a href="#">Bases de données</a>
+            <a href="#">Gestion de projet</a>
           </nav>
         </div>
       </div>
@@ -1545,34 +1625,6 @@
     
     window.addEventListener('scroll', revealElements);
     window.addEventListener('load', revealElements);
-    
-    // Slider de témoignages
-    const track = document.getElementById('testimonials-track');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const testimonials = document.querySelectorAll('.testimonial');
-    
-    let currentSlide = 0;
-    
-    const updateSlider = () => {
-      track.style.transform = `translateX(-${currentSlide * 100}%)`;
-    };
-    
-    prevBtn.addEventListener('click', () => {
-      currentSlide = (currentSlide === 0) ? testimonials.length - 1 : currentSlide - 1;
-      updateSlider();
-    });
-    
-    nextBtn.addEventListener('click', () => {
-      currentSlide = (currentSlide === testimonials.length - 1) ? 0 : currentSlide + 1;
-      updateSlider();
-    });
-    
-    // Auto-rotation du slider
-    setInterval(() => {
-      currentSlide = (currentSlide === testimonials.length - 1) ? 0 : currentSlide + 1;
-      updateSlider();
-    }, 8000);
     
     // Mode clair/sombre
     const themeToggle = document.getElementById('theme-toggle');
