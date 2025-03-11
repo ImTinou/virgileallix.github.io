@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projets - Virgile Allix</title>
+  <style>
+    /* Réinitialisation et styles globaux */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: #fff;
+      background: #000;
+      overflow-x: hidden;
+    }
+    
+    /* Fond dégradé animé */
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #ff0066, #ffcc00, #33ccff, #ff0066);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      z-index: -2;
+    }
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      transition: background 0.5s;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 1.1rem;
+      position: relative;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: #fff;
+      left: 0;
+      bottom: -5px;
+      transition: width 0.3s;
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    /* Section Header */
+    header {
+      margin-top: 80px;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 3rem;
+      opacity: 0;
+      animation: fadeInDown 1s forwards;
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    header p {
+      font-size: 1.2rem;
+      margin: 20px 0;
+      opacity: 0;
+      animation: fadeInUp 1s forwards;
+      animation-delay: 0.5s;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Grille des projets */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      margin: 20px;
+    }
+    
+    /* Cartes de projet */
+    .project-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+    .project-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 15px;
+    }
+    .card-content h2 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+    .card-content p {
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+    
+    /* Pied de page */
+    footer {
+      padding: 20px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.3);
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Fond -->
+  <div class="background"></div>
+  
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">Virgile Allix</div>
+    <div class="menu">
+      <a href="index.html">Accueil</a>
+      <a href="projet.html">Projets</a>
+      <a href="index.html#apropos">À propos</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </nav>
+  
+  <!-- Section Header -->
+  <header>
+    <h1>Mes Projets</h1>
+    <p>Explorez mes réalisations et projets innovants</p>
+  </header>
+  
+  <!-- Grille des projets -->
+  <section class="projects-grid">
+    <!-- Exemple de Projet 1 -->
+    <div class="project-card">
+      <img src="https://via.placeholder.com/300x200" alt="Projet 1">
+      <div class="card-content">
+        <h2>Projet 1</h2>
+        <p>Description succincte du projet 1. Un projet qui démontre mon expertise en design et développement.</p>
+      </div>
+    </div>
+    <!-- Exemple de Projet 2 -->
+    <div class="project-card">
+      <img src="https://via.placeholder.com/300x200" alt="Projet 2">
+      <div class="card-content">
+        <h2>Projet 2</h2>
+        <p>Description succincte du projet 2. Ce projet intègre des animations modernes et des interactions dynamiques.</p>
+      </div>
+    </div>
+    <!-- Exemple de Projet 3 -->
+    <div class="project-card">
+      <img src="https://via.placeholder.com/300x200" alt="Projet 3">
+      <div class="card-content">
+        <h2>Projet 3</h2>
+        <p>Description succincte du projet 3. Un projet mettant en valeur mes compétences en UX/UI design.</p>
+      </div>
+    </div>
+    <!-- Exemple de Projet 4 -->
+    <div class="project-card">
+      <img src="https://via.placeholder.com/300x200" alt="Projet 4">
+      <div class="card-content">
+        <h2>Projet 4</h2>
+        <p>Description succincte du projet 4. Un projet innovant et créatif qui illustre mon savoir-faire technique.</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Pied de page -->
+  <footer>
+    &copy; 2025 Virgile Allix. Tous droits réservés.
+  </footer>
+</body>
+</html>
