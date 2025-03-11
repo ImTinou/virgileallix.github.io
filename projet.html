@@ -1,42 +1,68 @@
+<!-- projet.html -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Projets - Virgile Allix</title>
+  <title>Projets WTF - Virgile Allix</title>
   <style>
-    /* Réinitialisation et styles globaux */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    /* Réinitialisation */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       color: #fff;
       background: #000;
       overflow-x: hidden;
+      perspective: 1000px;
     }
     
-    /* Fond dégradé animé */
+    /* Fond animé ultra dynamique */
     .background {
       position: fixed;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(45deg, #ff0066, #ffcc00, #33ccff, #ff0066);
-      background-size: 400% 400%;
-      animation: gradient 15s ease infinite;
-      z-index: -2;
+      background: radial-gradient(circle, #ff0066, #ffcc00, #33ccff);
+      animation: bgAnimation 20s infinite linear;
+      z-index: -10;
     }
-    @keyframes gradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes bgAnimation {
+      0% { filter: hue-rotate(0deg); }
+      50% { filter: hue-rotate(180deg); }
+      100% { filter: hue-rotate(360deg); }
     }
     
-    /* Navigation */
+    /* Formes flottantes WTF */
+    .shape {
+      position: absolute;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      animation: floatCrazy 12s ease-in-out infinite;
+    }
+    .shape.one {
+      width: 120px; height: 120px;
+      top: 15%; left: 5%;
+      animation-duration: 10s;
+    }
+    .shape.two {
+      width: 80px; height: 80px;
+      top: 70%; left: 85%;
+      animation-duration: 14s;
+    }
+    .shape.three {
+      width: 150px; height: 150px;
+      top: 50%; left: 40%;
+      animation-duration: 18s;
+    }
+    @keyframes floatCrazy {
+      0%   { transform: translate(0,0) rotate(0deg); }
+      25%  { transform: translate(20px, -20px) rotate(90deg); }
+      50%  { transform: translate(-20px, 20px) rotate(180deg); }
+      75%  { transform: translate(20px, 20px) rotate(270deg); }
+      100% { transform: translate(0,0) rotate(360deg); }
+    }
+    
+    /* Navigation animée avec effet rebond */
     nav {
       position: fixed;
       top: 0;
@@ -45,108 +71,140 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(10px);
       z-index: 100;
-      transition: background 0.5s;
+      transition: transform 0.5s;
     }
+    nav:hover { animation: navBounce 1s infinite alternate; }
+    @keyframes navBounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-5px); }
+    }
+    nav .logo { font-size: 1.8rem; font-weight: bold; }
     nav a {
       color: #fff;
       text-decoration: none;
-      margin: 0 15px;
+      margin-left: 20px;
       font-size: 1.1rem;
       position: relative;
     }
-    nav a::after {
+    nav a:hover::after {
       content: '';
       position: absolute;
-      width: 0;
-      height: 2px;
-      background: #fff;
-      left: 0;
-      bottom: -5px;
-      transition: width 0.3s;
-    }
-    nav a:hover::after {
+      left: 0; bottom: -5px;
       width: 100%;
+      height: 2px;
+      background: #ffcc00;
+      animation: flashLine 0.5s alternate infinite;
+    }
+    @keyframes flashLine {
+      from { opacity: 0.3; }
+      to { opacity: 1; }
     }
     
-    /* Section Header */
+    /* Header WTF avec rotations et wiggles */
     header {
-      margin-top: 80px;
-      padding: 40px 20px;
+      margin-top: 100px;
       text-align: center;
+      animation: headerSpin 2s ease-out;
+    }
+    @keyframes headerSpin {
+      from { transform: rotateX(90deg); opacity: 0; }
+      to { transform: rotateX(0deg); opacity: 1; }
     }
     header h1 {
-      font-size: 3rem;
-      opacity: 0;
-      animation: fadeInDown 1s forwards;
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+      animation: wiggle 1s ease-in-out infinite alternate;
     }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes wiggle {
+      from { transform: rotate(-2deg); }
+      to { transform: rotate(2deg); }
     }
     header p {
       font-size: 1.2rem;
-      margin: 20px 0;
-      opacity: 0;
-      animation: fadeInUp 1s forwards;
-      animation-delay: 0.5s;
+      margin-bottom: 20px;
+      animation: fadeIn 2s ease-in-out;
     }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
     
-    /* Grille des projets */
+    /* Grille des projets ultra animée */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      padding: 20px;
-      margin: 20px;
+      gap: 30px;
+      padding: 40px;
+      margin: 40px;
     }
-    
-    /* Cartes de projet */
     .project-card {
       background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
+      border-radius: 15px;
       overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
+      transform-style: preserve-3d;
+      perspective: 500px;
+      animation: cardEntrance 1s ease-out;
+      transition: transform 0.4s, box-shadow 0.4s;
+    }
+    @keyframes cardEntrance {
+      from { transform: rotateY(90deg); opacity: 0; }
+      to { transform: rotateY(0deg); opacity: 1; }
     }
     .project-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      transform: scale(1.05) rotateZ(2deg);
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.5);
+      animation: cardHover 0.5s ease-out;
+    }
+    @keyframes cardHover {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1) rotate(3deg); }
+      100% { transform: scale(1.05) rotateZ(2deg); }
     }
     .project-card img {
       width: 100%;
       height: 200px;
       object-fit: cover;
+      transition: transform 0.5s;
+    }
+    .project-card:hover img {
+      transform: scale(1.1) rotate(1deg);
     }
     .card-content {
-      padding: 15px;
+      padding: 20px;
+      animation: textBounce 1s ease-in-out;
     }
-    .card-content h2 {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
+    @keyframes textBounce {
+      0% { transform: translateY(10px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
     }
-    .card-content p {
-      font-size: 1rem;
-      line-height: 1.4;
-    }
+    .card-content h2 { font-size: 1.8rem; margin-bottom: 10px; }
+    .card-content p { font-size: 1rem; line-height: 1.4; }
     
-    /* Pied de page */
+    /* Pied de page pulsant */
     footer {
       padding: 20px;
       text-align: center;
-      background: rgba(0, 0, 0, 0.3);
-      margin-top: 20px;
+      background: rgba(0, 0, 0, 0.5);
+      margin-top: 40px;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
     }
   </style>
 </head>
 <body>
-  <!-- Fond -->
+  <!-- Fond animé -->
   <div class="background"></div>
+  <!-- Formes flottantes WTF -->
+  <div class="shape one"></div>
+  <div class="shape two"></div>
+  <div class="shape three"></div>
   
   <!-- Navigation -->
   <nav>
@@ -154,54 +212,50 @@
     <div class="menu">
       <a href="index.html">Accueil</a>
       <a href="projet.html">Projets</a>
-      <a href="index.html#apropos">À propos</a>
-      <a href="index.html#contact">Contact</a>
+      <a href="about.html">À propos</a>
+      <a href="contact.html">Contact</a>
     </div>
   </nav>
   
-  <!-- Section Header -->
+  <!-- Header WTF -->
   <header>
-    <h1>Mes Projets</h1>
-    <p>Explorez mes réalisations et projets innovants</p>
+    <h1>Projets WTF</h1>
+    <p>Préparez-vous à découvrir des projets qui sortent de l'ordinaire !</p>
   </header>
   
-  <!-- Grille des projets -->
+  <!-- Grille des projets ultra animée -->
   <section class="projects-grid">
-    <!-- Exemple de Projet 1 -->
     <div class="project-card">
       <img src="https://via.placeholder.com/300x200" alt="Projet 1">
       <div class="card-content">
         <h2>Projet 1</h2>
-        <p>Description succincte du projet 1. Un projet qui démontre mon expertise en design et développement.</p>
+        <p>Description de Projet 1. Une aventure visuelle avec des animations qui déchirent.</p>
       </div>
     </div>
-    <!-- Exemple de Projet 2 -->
     <div class="project-card">
       <img src="https://via.placeholder.com/300x200" alt="Projet 2">
       <div class="card-content">
         <h2>Projet 2</h2>
-        <p>Description succincte du projet 2. Ce projet intègre des animations modernes et des interactions dynamiques.</p>
+        <p>Description de Projet 2. Plongez dans un univers où chaque élément prend vie !</p>
       </div>
     </div>
-    <!-- Exemple de Projet 3 -->
     <div class="project-card">
       <img src="https://via.placeholder.com/300x200" alt="Projet 3">
       <div class="card-content">
         <h2>Projet 3</h2>
-        <p>Description succincte du projet 3. Un projet mettant en valeur mes compétences en UX/UI design.</p>
+        <p>Description de Projet 3. Une expérience interactive et folle qui vous surprendra.</p>
       </div>
     </div>
-    <!-- Exemple de Projet 4 -->
     <div class="project-card">
       <img src="https://via.placeholder.com/300x200" alt="Projet 4">
       <div class="card-content">
         <h2>Projet 4</h2>
-        <p>Description succincte du projet 4. Un projet innovant et créatif qui illustre mon savoir-faire technique.</p>
+        <p>Description de Projet 4. Laissez-vous emporter par des animations totalement WTF.</p>
       </div>
     </div>
   </section>
   
-  <!-- Pied de page -->
+  <!-- Pied de page pulsant -->
   <footer>
     &copy; 2025 Virgile Allix. Tous droits réservés.
   </footer>

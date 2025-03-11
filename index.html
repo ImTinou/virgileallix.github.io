@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -17,7 +18,7 @@
       background: #000;
       overflow-x: hidden;
     }
-
+    
     /* Fond dégradé animé */
     .background {
       position: fixed;
@@ -35,8 +36,8 @@
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-
-    /* Formes flottantes pour un effet dynamique */
+    
+    /* Formes flottantes */
     .floating-shape {
       position: absolute;
       border-radius: 50%;
@@ -72,8 +73,8 @@
       50% { transform: translate(20px, -20px); }
       100% { transform: translate(0, 0); }
     }
-
-    /* Barre de navigation fixe */
+    
+    /* Navigation */
     nav {
       position: fixed;
       top: 0;
@@ -107,8 +108,8 @@
     nav a:hover::after {
       width: 100%;
     }
-
-    /* Section héro avec animations sur le texte */
+    
+    /* Section Héro */
     .hero {
       height: 100vh;
       display: flex;
@@ -161,23 +162,7 @@
       from { opacity: 0; transform: scale(0.5); }
       to { opacity: 1; transform: scale(1); }
     }
-
-    /* Sections de contenu avec animation au défilement */
-    section {
-      padding: 80px 20px;
-      text-align: center;
-      background: rgba(0, 0, 0, 0.2);
-      margin: 40px 10%;
-      border-radius: 10px;
-      opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 1s, transform 1s;
-    }
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
+    
     /* Pied de page */
     footer {
       padding: 20px;
@@ -192,63 +177,28 @@
   <div class="floating-shape shape1"></div>
   <div class="floating-shape shape2"></div>
   <div class="floating-shape shape3"></div>
-
+  
   <!-- Navigation -->
   <nav>
     <div class="logo">Virgile Allix</div>
     <div class="menu">
-      <a href="#accueil">Accueil</a>
-      <a href="#projets">Projets</a>
-      <a href="#apropos">À propos</a>
-      <a href="#contact">Contact</a>
+      <a href="index.html">Accueil</a>
+      <a href="projet.html">Projets</a>
+      <a href="about.html">À propos</a>
+      <a href="contact.html">Contact</a>
     </div>
   </nav>
-
+  
   <!-- Section Héro -->
   <header class="hero" id="accueil">
     <h1>Virgile Allix</h1>
     <p>Bienvenue dans mon univers créatif. Découvrez mes projets et ma passion.</p>
-    <button class="btn" onclick="scrollToSection('projets')">Voir mes Projets</button>
+    <button class="btn" onclick="window.location.href='projet.html'">Voir mes Projets</button>
   </header>
-
-  <!-- Sections de contenu -->
-  <section id="projets">
-    <h2>Mes Projets</h2>
-    <p>Découvrez ici quelques-uns de mes travaux récents et innovants.</p>
-  </section>
-
-  <section id="apropos">
-    <h2>À Propos de Moi</h2>
-    <p>Passionné de design et de développement web, je crée des expériences uniques.</p>
-  </section>
-
-  <section id="contact">
-    <h2>Contactez-moi</h2>
-    <p>Pour toute collaboration ou projet, n'hésitez pas à me contacter.</p>
-  </section>
-
+  
   <!-- Pied de page -->
   <footer>
     &copy; 2025 Virgile Allix. Tous droits réservés.
   </footer>
-
-  <!-- JavaScript pour le défilement fluide et l'animation des sections -->
-  <script>
-    // Défilement fluide vers une section
-    function scrollToSection(id) {
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // Apparition des sections au scroll via Intersection Observer
-    const sections = document.querySelectorAll('section');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.3 });
-    sections.forEach(section => observer.observe(section));
-  </script>
 </body>
 </html>

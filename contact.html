@@ -1,0 +1,218 @@
+<!-- contact.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Virgile Allix</title>
+  <style>
+    /* Réinitialisation */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: #fff;
+      background: #000;
+      overflow-x: hidden;
+      perspective: 1000px;
+    }
+    /* Fond animé ultra dynamique */
+    .background {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, #ff0066, #ffcc00, #33ccff);
+      animation: bgAnimation 20s infinite linear;
+      z-index: -10;
+    }
+    @keyframes bgAnimation {
+      0% { filter: hue-rotate(0deg); }
+      50% { filter: hue-rotate(180deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+    /* Navigation animée */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      transition: transform 0.5s;
+    }
+    nav:hover { animation: navBounce 1s infinite alternate; }
+    @keyframes navBounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-5px); }
+    }
+    nav .logo { font-size: 1.8rem; font-weight: bold; }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 1.1rem;
+      position: relative;
+    }
+    nav a:hover::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 100%;
+      height: 2px;
+      background: #ffcc00;
+      animation: flashLine 0.5s alternate infinite;
+    }
+    @keyframes flashLine {
+      from { opacity: 0.3; }
+      to { opacity: 1; }
+    }
+    /* Header */
+    header {
+      margin-top: 100px;
+      text-align: center;
+      animation: headerSpin 2s ease-out;
+    }
+    @keyframes headerSpin {
+      from { transform: rotateX(90deg); opacity: 0; }
+      to { transform: rotateX(0deg); opacity: 1; }
+    }
+    header h1 {
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+      animation: wiggle 1s ease-in-out infinite alternate;
+    }
+    @keyframes wiggle {
+      from { transform: rotate(-2deg); }
+      to { transform: rotate(2deg); }
+    }
+    header p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      animation: fadeIn 2s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    /* Formulaire de contact */
+    .contact-form {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      animation: formFade 1s ease-out;
+    }
+    @keyframes formFade {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .contact-form h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .contact-form label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 1.1rem;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    .contact-form input {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+    .contact-form textarea {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      resize: vertical;
+      min-height: 150px;
+    }
+    .contact-form button {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 50px;
+      background: rgba(255,255,255,0.3);
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s;
+    }
+    .contact-form button:hover {
+      background: rgba(255,255,255,0.5);
+      transform: scale(1.05);
+    }
+    /* Footer pulsant */
+    footer {
+      padding: 20px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.5);
+      margin-top: 40px;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Fond animé -->
+  <div class="background"></div>
+  
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">Virgile Allix</div>
+    <div class="menu">
+      <a href="index.html">Accueil</a>
+      <a href="projet.html">Projets</a>
+      <a href="about.html">À propos</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+  
+  <!-- Header -->
+  <header>
+    <h1>Contact</h1>
+    <p>Entrons en contact !</p>
+  </header>
+  
+  <!-- Formulaire de contact -->
+  <section class="contact-form">
+    <h2>Envoyez-moi un message</h2>
+    <form action="#" method="post">
+      <label for="name">Nom</label>
+      <input type="text" id="name" name="name" required>
+      
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+      
+      <label for="message">Message</label>
+      <textarea id="message" name="message" required></textarea>
+      
+      <button type="submit">Envoyer</button>
+    </form>
+  </section>
+  
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Virgile Allix. Tous droits réservés.
+  </footer>
+</body>
+</html>
