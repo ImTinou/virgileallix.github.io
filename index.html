@@ -5,84 +5,250 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio - Virgile Allix</title>
   <style>
-    /* Animation de fond en dégradé */
-    body {
+    /* Réinitialisation et styles globaux */
+    * {
       margin: 0;
       padding: 0;
-      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      font-family: 'Arial', sans-serif;
-      color: white;
-      overflow: hidden;
+      box-sizing: border-box;
     }
-    @keyframes gradientBG {
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: #fff;
+      background: #000;
+      overflow-x: hidden;
+    }
+
+    /* Fond dégradé animé */
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #ff0066, #ffcc00, #33ccff, #ff0066);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      z-index: -2;
+    }
+    @keyframes gradient {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
 
-    /* Conteneur centré */
-    .container {
+    /* Formes flottantes pour un effet dynamique */
+    .floating-shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: float 10s ease-in-out infinite;
+    }
+    .shape1 {
+      width: 150px;
+      height: 150px;
+      background: rgba(255,255,255,0.2);
+      top: 20%;
+      left: 10%;
+      animation-duration: 12s;
+    }
+    .shape2 {
+      width: 100px;
+      height: 100px;
+      background: rgba(255,255,255,0.2);
+      top: 60%;
+      left: 80%;
+      animation-duration: 15s;
+    }
+    .shape3 {
+      width: 200px;
+      height: 200px;
+      background: rgba(255,255,255,0.2);
+      top: 70%;
+      left: 20%;
+      animation-duration: 18s;
+    }
+    @keyframes float {
+      0% { transform: translate(0, 0); }
+      50% { transform: translate(20px, -20px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    /* Barre de navigation fixe */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      transition: background 0.5s;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 1.1rem;
+      position: relative;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: #fff;
+      left: 0;
+      bottom: -5px;
+      transition: width 0.3s;
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Section héro avec animations sur le texte */
+    .hero {
+      height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
       text-align: center;
+      padding: 0 20px;
+      position: relative;
     }
-
-    /* Animation d'apparition du titre */
-    h1 {
+    .hero h1 {
       font-size: 4rem;
-      margin: 0;
-      animation: fadeInDown 2s ease forwards;
+      opacity: 0;
+      animation: slideInDown 1.5s ease-out forwards;
     }
-    @keyframes fadeInDown {
-      0% { opacity: 0; transform: translateY(-50px); }
-      100% { opacity: 1; transform: translateY(0); }
+    @keyframes slideInDown {
+      from { opacity: 0; transform: translateY(-50px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-
-    /* Animation d'apparition du sous-titre */
-    p {
+    .hero p {
       font-size: 1.5rem;
-      margin-top: 20px;
-      animation: fadeInUp 2s ease forwards;
-      animation-delay: 1s;
+      margin: 20px 0;
+      opacity: 0;
+      animation: slideInUp 1.5s ease-out forwards;
+      animation-delay: 0.5s;
     }
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(50px); }
-      100% { opacity: 1; transform: translateY(0); }
+    @keyframes slideInUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-
-    /* Bouton animé */
-    .btn {
-      margin-top: 40px;
-      padding: 15px 30px;
+    .hero .btn {
+      margin-top: 30px;
+      padding: 15px 40px;
       font-size: 1.2rem;
       border: none;
-      border-radius: 30px;
+      border-radius: 50px;
       background: rgba(255, 255, 255, 0.3);
-      color: white;
+      color: #fff;
       cursor: pointer;
-      transition: background 0.3s ease;
-      animation: popIn 2s ease forwards;
-      animation-delay: 2s;
+      transition: transform 0.3s, background 0.3s;
+      opacity: 0;
+      animation: popIn 1.5s ease-out forwards;
+      animation-delay: 1s;
     }
-    .btn:hover {
+    .hero .btn:hover {
       background: rgba(255, 255, 255, 0.5);
+      transform: scale(1.05);
     }
     @keyframes popIn {
-      0% { transform: scale(0.5); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
+      from { opacity: 0; transform: scale(0.5); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Sections de contenu avec animation au défilement */
+    section {
+      padding: 80px 20px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.2);
+      margin: 40px 10%;
+      border-radius: 10px;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 1s, transform 1s;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Pied de page */
+    footer {
+      padding: 20px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.3);
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <!-- Fond et formes animées -->
+  <div class="background"></div>
+  <div class="floating-shape shape1"></div>
+  <div class="floating-shape shape2"></div>
+  <div class="floating-shape shape3"></div>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">Virgile Allix</div>
+    <div class="menu">
+      <a href="#accueil">Accueil</a>
+      <a href="#projets">Projets</a>
+      <a href="#apropos">À propos</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Section Héro -->
+  <header class="hero" id="accueil">
     <h1>Virgile Allix</h1>
-    <p>Bienvenue sur mon portfolio. Découvrez mes projets et mon univers créatif.</p>
-    <button class="btn" onclick="alert('Merci de votre visite!')">Explorer</button>
-  </div>
+    <p>Bienvenue dans mon univers créatif. Découvrez mes projets et ma passion.</p>
+    <button class="btn" onclick="scrollToSection('projets')">Voir mes Projets</button>
+  </header>
+
+  <!-- Sections de contenu -->
+  <section id="projets">
+    <h2>Mes Projets</h2>
+    <p>Découvrez ici quelques-uns de mes travaux récents et innovants.</p>
+  </section>
+
+  <section id="apropos">
+    <h2>À Propos de Moi</h2>
+    <p>Passionné de design et de développement web, je crée des expériences uniques.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contactez-moi</h2>
+    <p>Pour toute collaboration ou projet, n'hésitez pas à me contacter.</p>
+  </section>
+
+  <!-- Pied de page -->
+  <footer>
+    &copy; 2025 Virgile Allix. Tous droits réservés.
+  </footer>
+
+  <!-- JavaScript pour le défilement fluide et l'animation des sections -->
+  <script>
+    // Défilement fluide vers une section
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Apparition des sections au scroll via Intersection Observer
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.3 });
+    sections.forEach(section => observer.observe(section));
+  </script>
 </body>
 </html>
