@@ -6,110 +6,98 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio - Virgile Allix</title>
   <style>
-    /* Réinitialisation et styles globaux */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    /* Global reset et styles */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      color: #fff;
       background: #000;
+      color: #fff;
       overflow-x: hidden;
+      position: relative;
     }
     
-    /* Fond dégradé animé */
+    /* Fond animé dynamique */
     .background {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(45deg, #ff0066, #ffcc00, #33ccff, #ff0066);
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #ff0066, #ffcc00, #33ccff, #ff0066);
       background-size: 400% 400%;
-      animation: gradient 15s ease infinite;
-      z-index: -2;
+      animation: bgAnimation 30s ease infinite;
+      z-index: -10;
     }
-    @keyframes gradient {
+    @keyframes bgAnimation {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
     
-    /* Formes flottantes */
+    /* Formes flottantes animées */
     .floating-shape {
       position: absolute;
       border-radius: 50%;
-      opacity: 0.6;
-      animation: float 10s ease-in-out infinite;
+      opacity: 0.5;
+      animation: float 20s ease-in-out infinite, rotateShape 20s linear infinite;
     }
-    .shape1 {
-      width: 150px;
-      height: 150px;
-      background: rgba(255,255,255,0.2);
-      top: 20%;
-      left: 10%;
-      animation-duration: 12s;
-    }
-    .shape2 {
-      width: 100px;
-      height: 100px;
-      background: rgba(255,255,255,0.2);
-      top: 60%;
-      left: 80%;
-      animation-duration: 15s;
-    }
-    .shape3 {
-      width: 200px;
-      height: 200px;
-      background: rgba(255,255,255,0.2);
-      top: 70%;
-      left: 20%;
-      animation-duration: 18s;
-    }
+    .shape1 { width: 150px; height: 150px; top: 10%; left: 15%; }
+    .shape2 { width: 100px; height: 100px; top: 70%; left: 80%; }
+    .shape3 { width: 200px; height: 200px; top: 50%; left: 30%; }
     @keyframes float {
       0% { transform: translate(0, 0); }
-      50% { transform: translate(20px, -20px); }
+      50% { transform: translate(30px, -30px); }
       100% { transform: translate(0, 0); }
     }
+    @keyframes rotateShape {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
     
-    /* Navigation */
+    /* Barre de navigation animée */
     nav {
       position: fixed;
-      top: 0;
+      top: 0; left: 0;
       width: 100%;
-      padding: 20px 40px;
+      padding: 20px 50px;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(10px);
       z-index: 100;
-      transition: background 0.5s;
+      animation: fadeIn 1s ease-out;
     }
-    nav a {
+    nav .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      animation: pulseLogo 2s infinite alternate;
+    }
+    @keyframes pulseLogo {
+      from { transform: scale(1); }
+      to { transform: scale(1.1); }
+    }
+    nav .menu a {
       color: #fff;
       text-decoration: none;
-      margin: 0 15px;
+      margin-left: 30px;
       font-size: 1.1rem;
       position: relative;
+      transition: color 0.3s ease;
     }
-    nav a::after {
+    nav .menu a:hover { color: #ffcc00; }
+    nav .menu a::after {
       content: '';
       position: absolute;
+      bottom: -5px;
+      left: 0;
       width: 0;
       height: 2px;
-      background: #fff;
-      left: 0;
-      bottom: -5px;
-      transition: width 0.3s;
+      background: #ffcc00;
+      transition: width 0.3s ease;
     }
-    nav a:hover::after {
-      width: 100%;
-    }
+    nav .menu a:hover::after { width: 100%; }
     
-    /* Section Héro */
+    /* Section Héro avec animations multiples */
     .hero {
       height: 100vh;
       display: flex;
@@ -118,62 +106,66 @@
       align-items: center;
       text-align: center;
       padding: 0 20px;
-      position: relative;
+      animation: fadeInUp 2s ease-out;
     }
-    .hero h1 {
-      font-size: 4rem;
-      opacity: 0;
-      animation: slideInDown 1.5s ease-out forwards;
-    }
-    @keyframes slideInDown {
-      from { opacity: 0; transform: translateY(-50px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .hero p {
-      font-size: 1.5rem;
-      margin: 20px 0;
-      opacity: 0;
-      animation: slideInUp 1.5s ease-out forwards;
-      animation-delay: 0.5s;
-    }
-    @keyframes slideInUp {
+    @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(50px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    .hero h1 {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      animation: slideIn 2s ease-out;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-100px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .hero p {
+      font-size: 1.5rem;
+      margin-bottom: 40px;
+      animation: fadeIn 2s ease-out 1s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
     .hero .btn {
-      margin-top: 30px;
       padding: 15px 40px;
       font-size: 1.2rem;
       border: none;
       border-radius: 50px;
-      background: rgba(255, 255, 255, 0.3);
+      background: rgba(255,255,255,0.3);
       color: #fff;
       cursor: pointer;
       transition: transform 0.3s, background 0.3s;
-      opacity: 0;
-      animation: popIn 1.5s ease-out forwards;
-      animation-delay: 1s;
+      animation: bounce 2s infinite alternate;
     }
     .hero .btn:hover {
-      background: rgba(255, 255, 255, 0.5);
-      transform: scale(1.05);
+      background: rgba(255,255,255,0.5);
+      transform: scale(1.1);
     }
-    @keyframes popIn {
-      from { opacity: 0; transform: scale(0.5); }
-      to { opacity: 1; transform: scale(1); }
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-10px); }
     }
     
-    /* Pied de page */
+    /* Footer animé */
     footer {
       padding: 20px;
       text-align: center;
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.7);
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      animation: fadeIn 2s ease-out;
     }
   </style>
 </head>
 <body>
-  <!-- Fond et formes animées -->
+  <!-- Fond animé -->
   <div class="background"></div>
+  <!-- Formes flottantes -->
   <div class="floating-shape shape1"></div>
   <div class="floating-shape shape2"></div>
   <div class="floating-shape shape3"></div>
@@ -190,13 +182,13 @@
   </nav>
   
   <!-- Section Héro -->
-  <header class="hero" id="accueil">
-    <h1>Virgile Allix</h1>
-    <p>Bienvenue dans mon univers créatif. Découvrez mes projets et ma passion.</p>
-    <button class="btn" onclick="window.location.href='projet.html'">Voir mes Projets</button>
-  </header>
+  <section class="hero">
+    <h1>Bienvenue sur mon Portfolio</h1>
+    <p>Découvrez mes projets, mon parcours et mes inspirations.</p>
+    <button class="btn" onclick="window.location.href='projet.html'">Voir Projets</button>
+  </section>
   
-  <!-- Pied de page -->
+  <!-- Footer -->
   <footer>
     &copy; 2025 Virgile Allix. Tous droits réservés.
   </footer>

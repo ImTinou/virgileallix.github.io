@@ -4,164 +4,130 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Projets WTF - Virgile Allix</title>
+  <title>Projets - Virgile Allix</title>
   <style>
-    /* Réinitialisation */
+    /* Réinitialisation globale */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      color: #fff;
       background: #000;
+      color: #fff;
       overflow-x: hidden;
-      perspective: 1000px;
+      position: relative;
     }
     
-    /* Fond animé ultra dynamique */
+    /* Fond animé */
     .background {
       position: fixed;
       top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, #ff0066, #ffcc00, #33ccff);
-      animation: bgAnimation 20s infinite linear;
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #ff0066, #ffcc00, #33ccff, #ff0066);
+      background-size: 400% 400%;
+      animation: bgAnimation 30s ease infinite;
       z-index: -10;
     }
     @keyframes bgAnimation {
-      0% { filter: hue-rotate(0deg); }
-      50% { filter: hue-rotate(180deg); }
-      100% { filter: hue-rotate(360deg); }
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
     
-    /* Formes flottantes WTF */
-    .shape {
-      position: absolute;
-      background: rgba(255,255,255,0.1);
-      border-radius: 50%;
-      animation: floatCrazy 12s ease-in-out infinite;
-    }
-    .shape.one {
-      width: 120px; height: 120px;
-      top: 15%; left: 5%;
-      animation-duration: 10s;
-    }
-    .shape.two {
-      width: 80px; height: 80px;
-      top: 70%; left: 85%;
-      animation-duration: 14s;
-    }
-    .shape.three {
-      width: 150px; height: 150px;
-      top: 50%; left: 40%;
-      animation-duration: 18s;
-    }
-    @keyframes floatCrazy {
-      0%   { transform: translate(0,0) rotate(0deg); }
-      25%  { transform: translate(20px, -20px) rotate(90deg); }
-      50%  { transform: translate(-20px, 20px) rotate(180deg); }
-      75%  { transform: translate(20px, 20px) rotate(270deg); }
-      100% { transform: translate(0,0) rotate(360deg); }
-    }
-    
-    /* Navigation animée avec effet rebond */
+    /* Navigation */
     nav {
       position: fixed;
       top: 0;
       width: 100%;
-      padding: 20px 40px;
+      padding: 20px 50px;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(10px);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(10px);
       z-index: 100;
-      transition: transform 0.5s;
+      animation: fadeIn 1s ease-out;
     }
-    nav:hover { animation: navBounce 1s infinite alternate; }
-    @keyframes navBounce {
-      from { transform: translateY(0); }
-      to { transform: translateY(-5px); }
+    nav .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      animation: pulseLogo 2s infinite alternate;
     }
-    nav .logo { font-size: 1.8rem; font-weight: bold; }
-    nav a {
+    @keyframes pulseLogo {
+      from { transform: scale(1); }
+      to { transform: scale(1.1); }
+    }
+    nav .menu a {
       color: #fff;
       text-decoration: none;
-      margin-left: 20px;
+      margin-left: 30px;
       font-size: 1.1rem;
       position: relative;
+      transition: color 0.3s ease;
     }
-    nav a:hover::after {
+    nav .menu a:hover { color: #ffcc00; }
+    nav .menu a::after {
       content: '';
       position: absolute;
-      left: 0; bottom: -5px;
-      width: 100%;
+      bottom: -5px;
+      left: 0;
+      width: 0;
       height: 2px;
       background: #ffcc00;
-      animation: flashLine 0.5s alternate infinite;
+      transition: width 0.3s ease;
     }
-    @keyframes flashLine {
-      from { opacity: 0.3; }
-      to { opacity: 1; }
-    }
+    nav .menu a:hover::after { width: 100%; }
     
-    /* Header WTF avec rotations et wiggles */
+    /* Header pour la page Projets */
     header {
-      margin-top: 100px;
+      margin-top: 120px;
       text-align: center;
-      animation: headerSpin 2s ease-out;
+      padding: 20px;
+      animation: headerFlip 2s ease-out;
     }
-    @keyframes headerSpin {
+    @keyframes headerFlip {
       from { transform: rotateX(90deg); opacity: 0; }
-      to { transform: rotateX(0deg); opacity: 1; }
+      to { transform: rotateX(0); opacity: 1; }
     }
     header h1 {
-      font-size: 3.5rem;
-      margin-bottom: 10px;
-      animation: wiggle 1s ease-in-out infinite alternate;
+      font-size: 3.8rem;
+      margin-bottom: 20px;
+      animation: textGlow 3s ease-in-out infinite;
     }
-    @keyframes wiggle {
-      from { transform: rotate(-2deg); }
-      to { transform: rotate(2deg); }
+    @keyframes textGlow {
+      0% { text-shadow: 0 0 10px #ff0066, 0 0 20px #ffcc00; }
+      50% { text-shadow: 0 0 20px #33ccff, 0 0 30px #ff0066; }
+      100% { text-shadow: 0 0 10px #ff0066, 0 0 20px #ffcc00; }
     }
     header p {
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-      animation: fadeIn 2s ease-in-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      font-size: 1.4rem;
+      margin-bottom: 40px;
+      animation: fadeIn 2s ease 1s;
     }
     
-    /* Grille des projets ultra animée */
+    /* Grille de projets avec animation */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
+      gap: 40px;
       padding: 40px;
-      margin: 40px;
+      animation: fadeIn 2s ease;
     }
+    /* Carte de projet */
     .project-card {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
       overflow: hidden;
-      transform-style: preserve-3d;
-      perspective: 500px;
-      animation: cardEntrance 1s ease-out;
-      transition: transform 0.4s, box-shadow 0.4s;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      transform: translateY(50px);
+      opacity: 0;
+      animation: cardFadeIn 1.5s ease-out forwards;
     }
-    @keyframes cardEntrance {
-      from { transform: rotateY(90deg); opacity: 0; }
-      to { transform: rotateY(0deg); opacity: 1; }
+    @keyframes cardFadeIn {
+      to { transform: translateY(0); opacity: 1; }
     }
     .project-card:hover {
-      transform: scale(1.05) rotateZ(2deg);
-      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.5);
-      animation: cardHover 0.5s ease-out;
-    }
-    @keyframes cardHover {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1) rotate(3deg); }
-      100% { transform: scale(1.05) rotateZ(2deg); }
+      transform: translateY(-10px) scale(1.02);
+      transition: transform 0.3s ease;
     }
     .project-card img {
       width: 100%;
@@ -170,41 +136,40 @@
       transition: transform 0.5s;
     }
     .project-card:hover img {
-      transform: scale(1.1) rotate(1deg);
+      transform: scale(1.1);
     }
     .card-content {
       padding: 20px;
-      animation: textBounce 1s ease-in-out;
+      animation: textBounce 1s ease;
     }
     @keyframes textBounce {
-      0% { transform: translateY(10px); opacity: 0; }
-      100% { transform: translateY(0); opacity: 1; }
+      from { transform: translateY(10px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
-    .card-content h2 { font-size: 1.8rem; margin-bottom: 10px; }
-    .card-content p { font-size: 1rem; line-height: 1.4; }
+    .card-content h2 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      border-bottom: 2px solid #ffcc00;
+      padding-bottom: 5px;
+    }
+    .card-content p {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
     
-    /* Pied de page pulsant */
+    /* Footer */
     footer {
       padding: 20px;
       text-align: center;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.7);
       margin-top: 40px;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
+      animation: fadeIn 2s ease-out;
     }
   </style>
 </head>
 <body>
   <!-- Fond animé -->
   <div class="background"></div>
-  <!-- Formes flottantes WTF -->
-  <div class="shape one"></div>
-  <div class="shape two"></div>
-  <div class="shape three"></div>
   
   <!-- Navigation -->
   <nav>
@@ -217,45 +182,45 @@
     </div>
   </nav>
   
-  <!-- Header WTF -->
+  <!-- Header -->
   <header>
-    <h1>Projets WTF</h1>
-    <p>Préparez-vous à découvrir des projets qui sortent de l'ordinaire !</p>
+    <h1>Mes Projets</h1>
+    <p>Découvrez mes réalisations et projets créatifs.</p>
   </header>
   
-  <!-- Grille des projets ultra animée -->
+  <!-- Grille des projets -->
   <section class="projects-grid">
-    <div class="project-card">
+    <div class="project-card" style="animation-delay: 0.5s;">
       <img src="https://via.placeholder.com/300x200" alt="Projet 1">
       <div class="card-content">
         <h2>Projet 1</h2>
-        <p>Description de Projet 1. Une aventure visuelle avec des animations qui déchirent.</p>
+        <p>Description de Projet 1. Une expérience visuelle unique.</p>
       </div>
     </div>
-    <div class="project-card">
+    <div class="project-card" style="animation-delay: 0.7s;">
       <img src="https://via.placeholder.com/300x200" alt="Projet 2">
       <div class="card-content">
         <h2>Projet 2</h2>
-        <p>Description de Projet 2. Plongez dans un univers où chaque élément prend vie !</p>
+        <p>Description de Projet 2. Une aventure numérique captivante.</p>
       </div>
     </div>
-    <div class="project-card">
+    <div class="project-card" style="animation-delay: 0.9s;">
       <img src="https://via.placeholder.com/300x200" alt="Projet 3">
       <div class="card-content">
         <h2>Projet 3</h2>
-        <p>Description de Projet 3. Une expérience interactive et folle qui vous surprendra.</p>
+        <p>Description de Projet 3. Un design innovant et interactif.</p>
       </div>
     </div>
-    <div class="project-card">
+    <div class="project-card" style="animation-delay: 1.1s;">
       <img src="https://via.placeholder.com/300x200" alt="Projet 4">
       <div class="card-content">
         <h2>Projet 4</h2>
-        <p>Description de Projet 4. Laissez-vous emporter par des animations totalement WTF.</p>
+        <p>Description de Projet 4. Une création artistique numérique.</p>
       </div>
     </div>
   </section>
   
-  <!-- Pied de page pulsant -->
+  <!-- Footer -->
   <footer>
     &copy; 2025 Virgile Allix. Tous droits réservés.
   </footer>
